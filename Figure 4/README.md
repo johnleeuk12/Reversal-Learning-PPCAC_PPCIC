@@ -12,7 +12,7 @@ eg_Data{n,3} = Behavior data (see below)
 eg_Data{n,4} = time corresponding to each sample (in s) \
 eg_Data{n,5} = Trial to reversal\
 eg_Data{n,6} = recorded session id\
-eg_Data{n,7} = rewarded time (0 if no reward)\
+eg_Data{n,7} = rewarded time (0 if no reward)
 
 
 
