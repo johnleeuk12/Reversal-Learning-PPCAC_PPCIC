@@ -7,14 +7,14 @@ We first ran the GLM, then saved the data to avoid running the model again for f
 - alpha: best alpha value for Elasticnet regression fitting
 - coef: individual model kernels for each task variable. Only fitted task variables are shown here
 - init_score: initial r2 fitting score for each task variable
-- L : lick rate (binned by 50ms window)
+- L : lick rate (binned by 100ms window)
 - r_onset : reward onset
 - score : final score for the fully built model, validated 20 times
 - stim_onset: stimulus onset
 - theta : fully built model coefficient weights (validated 20 times)
 - X4: fully built model kernel
-- Y : Calcium trace (dF/F0) (binned by 50ms window)
-- yhat : model fitted trace.  (binned by 50ms window)
+- Y : Calcium trace (dF/F0) (binned by 100ms window)
+- yhat : model fitted trace.  (binned by 100ms window)
 
 # List of alpha values
 
