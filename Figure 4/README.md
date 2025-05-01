@@ -7,6 +7,7 @@ eg_Data{n,3} = Behavior data (see below)
 - 1st column : stim onset time (in sample number)
 - 2nd column : rule (1 or 2)
 - 3rd to 7th column : Go, Lick, Reward, Correct, stim
+
 eg_Data{n,4} = time corresponding to each sample (in s) 
 eg_Data{n,5} = Trial to reversal
 eg_Data{n,6} = recorded session id
