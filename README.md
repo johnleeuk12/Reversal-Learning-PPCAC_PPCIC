@@ -6,5 +6,5 @@ Authors: Eunji Jung, Jong-Hoon Lee, Geonhui Ryu, Gil-Hyun Kim, Seung-Hee Lee
 
 Contact jonghoon.lee629@gmail.com for any questions regarding  this repository.
 
-The analyses were performed in Matlab (for figures XXXXXX) and in Python v3.8 for figures 4, 5 and 6.
+The analyses were performed in Matlab (for figures XXXXXX) and in Python v3.8 for figures 4, 5 and 6.\
 Please refer to the README.md for explanations for each example datasets, and notes and comments in each code for analysis. 
