@@ -1,6 +1,6 @@
 # Example data
 Ca_data_example.mat is an example of the calcium imaging recording data of one cell as well as relevant behavioral information such as detected lick times and trial outcome during task. \
-This is the data used for all analyses using calcium imaging data.\
+This is the data used for all analyses using calcium imaging data.
 
 eg_Data{n,1} = recorded dF/F0 (in sample number)\
 eg_Data{n,2} = Lick times (s)\
