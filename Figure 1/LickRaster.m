@@ -2,13 +2,12 @@
 %%%%%%%%%%%%%% Eunji Jung, 2025-May-02
 
 clear; clc; close all
-    % prompt = 'log file name?'; 
-    %path = inputdlg(prompt);
-    % filename = fopen(strcat(path{1,1}, '.log'));
-    filename = fopen('ExtendedDataFig1_LickRaster_AudRL_Expert_delay1000ms.log')
+    prompt = 'log file name?'; 
+    path = inputdlg(prompt);
+    filename = fopen(strcat(path{1,1}, '.log'));
+    %filename = fopen('Eg_LickRaster_AudRL_naive_delay500ms.log')
 fromtxt=textscan(filename,'%s %s %s %s %s %s %s %s %s %s %s %s %s','Delimiter','\t');
-%%
-
+%%%
 %%% reading txt
 num_col4 = str2double(fromtxt{1,4});  
 num_col5 = str2double(fromtxt{1,5});  
@@ -27,10 +26,10 @@ deterror = diff(lick_time_temp);
 idx = find(deterror > 100) + 1;
 lick_time_ms = [lick_time_temp(1); lick_time_temp(idx)];
 
-%%%% parameter settings : duration (ms)
-stim = 500;     rw = 2000;      pre = 1000;      delay = 1000; 
+%%%% parameter settings : change the duration (ms) here for the lickraster plot 
+stim = 500;     rw = 2000;      pre = 1000;      delay = 1000;      post = 6000; 
 Antperiod = stim+delay;
-stimperiod = stim+delay+rw;
+stimperiod = 6000; %stim+delay+rw; 
 
 %%% port code
 Tra_R1_5kHz = 211;      Tra_R1_10kHz = 212;     Cond_R1_5kHz = 1211;    Cond_R1_10kHz = 1212;
@@ -232,12 +231,12 @@ end
 %%% collecting lick event according to the stim type 
 stimtype_lick = cell(1,2);
 [is5kHz, is10kHz] = deal(ismember(temp_ms(:,1), target_5kHz), ismember(temp_ms(:,1), target_10kHz));
-timeMask = temp_ms(:,2) < BlockTime;
+timeMask = temp_ms(:,2) < BlockTime + 1000000;
 stimData = {temp_ms(is5kHz & timeMask,2), temp_ms(is10kHz & timeMask,2)};
 
 for i = 1:2
     onsets = stimData{i};
-    lickMask = @(o) lick_time_ms > o - pre & lick_time_ms < o + 6000;
+    lickMask = @(o) lick_time_ms > o - pre & lick_time_ms < o + stimperiod;
     delayLick = @(o) any(lick_time_ms > o + stim + delay & lick_time_ms < o + stimperiod);
     stimtype_lick{i} = arrayfun(@(o) {...
         lick_time_ms(lickMask(o)) - o, ...   % lick time
@@ -260,10 +259,10 @@ Stage_num = cumsum(Stage);
 
 %%% plotting lick raster plot 
 sz = 3; sz2 = 7; whetherlick = 500;
-
+prelick = 1000;
 f = figure('Position',[400 100 400 500], 'Renderer','painters');
 title(path);
-x_limits = [-pre 6000+whetherlick];
+x_limits = [-prelick stimperiod+whetherlick];
 stage_y = Stage_num(:,1)/2;
 rev_y = Stage_num(1,1)/2 + Rev_point{1,2}(1,1)/2;
 tnum = 200; 
@@ -289,7 +288,7 @@ for s = 1:size(stimtype_lick,2)
         scatter(ax, lick_times, trial_nums, sz, 'k', 'filled');
     end
 
-    binary_x = 6000 + whetherlick;
+    binary_x = stimperiod + whetherlick;
     trial_ids = cellfun(@(x) x{2}, currData);
     is_type1 = cellfun(@(x) x{3} == 1, currData);
     
